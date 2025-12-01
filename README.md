@@ -11,7 +11,7 @@ MSSQL_SA_PASSWORD=Your_password123 docker compose up --build
 ```
 
 **Access the API:**
-- **Swagger UI (API Documentation):** [http://localhost:5000/swagger/ui](http://localhost:5000/swagger/ui)
+- **Swagger UI (API Documentation):** [http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)
 - **Health Check:** [http://localhost:5000/health](http://localhost:5000/health)
 
 **Optional React Frontend Interface:**
