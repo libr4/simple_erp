@@ -1,0 +1,36 @@
+# Visual Studio / .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Build outputs
+**/bin/
+**/obj/
+
+# Environment files
+.env
+
+# Node modules
+frontend/node_modules/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Test results
+TestResults/
+
+# JetBrains Rider
+.idea/
