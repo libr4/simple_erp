@@ -1,9 +1,5 @@
 # Target Technical Assignment
 
-A comprehensive .NET 8 API solution addressing three business challenges: commission calculation, inventory management, and overdue fee computation. Built with clean architecture, SOLID, Entity Framework Core, and best practices for production-ready code.
-
----
-
 ## 🚀 Quick Start
 
 ### Option 1: Docker Compose (Recommended)
