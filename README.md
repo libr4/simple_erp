@@ -1,4 +1,4 @@
-# Target Gupy Technical Assignment
+# Target Technical Assignment
 
 A comprehensive .NET 8 API solution addressing three business challenges: commission calculation, inventory management, and overdue fee computation. Built with clean architecture, SOLID, Entity Framework Core, and best practices for production-ready code.
 
@@ -324,7 +324,7 @@ The frontend provides an optional interactive interface to test the API endpoint
 ## 📁 Project Structure
 
 ```
-target_gupy/
+simple_erp/
 ├── backend/                          # ASP.NET Core API
 │   ├── Controllers/                  # API endpoints
 │   ├── Services/                     # Business logic
