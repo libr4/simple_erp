@@ -39,7 +39,6 @@ To run the API and frontend locally on your machine, you must have **SQL Server 
 ```bash
 cd backend
 dotnet restore
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Server=.;Database=TargetGupy;Trusted_Connection=true;Encrypt=false;"
 dotnet ef database update
 dotnet run
 ```
