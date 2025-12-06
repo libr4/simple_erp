@@ -29,7 +29,7 @@ namespace Backend.Tests.UnitTests
                 }
             };
 
-            var res = svc.CalculateCommission(req);
+            var res = _svc.CalculateCommission(req);
             res.Should().NotBeNull();
             var list = new List<object>(res);
             list.Should().HaveCount(1);
@@ -52,7 +52,7 @@ namespace Backend.Tests.UnitTests
                 }
             };
 
-            var res = svc.CalculateCommission(req);
+            var res = _svc.CalculateCommission(req);
             var list = new List<object>(res);
             list.Should().HaveCount(3, "Expected one result per seller");
         }
@@ -68,7 +68,7 @@ namespace Backend.Tests.UnitTests
                 }
             };
 
-            var res = svc.CalculateCommission(req);
+            var res = _svc.CalculateCommission(req);
             var list = new List<object>(res);
             list.Should().HaveCount(1);
         }
@@ -77,7 +77,7 @@ namespace Backend.Tests.UnitTests
         public void CalculateCommission_WithEmptyList_ReturnsEmptyResult()
         {
             var req = new CommissionRequest { Vendas = new List<VendaDto>() };
-            var res = svc.CalculateCommission(req);
+            var res = _svc.CalculateCommission(req);
             var list = new List<object>(res);
             list.Should().BeEmpty();
         }
