@@ -1,0 +1,60 @@
+name: .NET Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Run unit and integration tests
+    runs-on: ubuntu-latest
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: "Y"
+          SA_PASSWORD: ${{ secrets.MSSQL_SA_PASSWORD }}
+        ports:
+          - 1433:1433
+        options: >-
+          --health-cmd "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P $SA_PASSWORD -Q 'SELECT 1'" \
+          --health-interval=10s --health-timeout=5s --health-retries=30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore -c Release
+
+      - name: Run unit tests
+        run: |
+          dotnet test backend/Tests/UnitTests/UnitTests.csproj --no-build --logger:"trx;LogFileName=unit.trx"
+
+      - name: Wait for SQL Server
+        run: |
+          echo "Waiting for SQL Server to accept connections..."
+          for i in {1..30}; do
+            if timeout 1 bash -c "cat < /dev/tcp/localhost/1433" 2>/dev/null; then
+              echo "SQL Server is listening on port 1433"
+              break
+            fi
+            echo "Waiting for SQL Server... ($i/30)"
+            sleep 2
+          done
+
+      - name: Run integration tests
+        env:
+          TEST_SQL_CONN: "Server=localhost,1433;User ID=sa;Password=${{ secrets.MSSQL_SA_PASSWORD }};TrustServerCertificate=True;Encrypt=False;"
+        run: |
+          dotnet test backend/Tests/IntegrationTests/IntegrationTests.csproj --no-build -v minimal --logger:"trx;LogFileName=integration.trx"
