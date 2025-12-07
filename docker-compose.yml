@@ -26,7 +26,7 @@ services:
     volumes:
       - mssql-data:/var/opt/mssql
     healthcheck:
-      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"Your_password123\" -Q \"SELECT 1\" > /dev/null"]
+      test: ["CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \"${MSSQL_SA_PASSWORD}\" -Q \"SELECT 1\" > /dev/null"]
       interval: 10s
       timeout: 5s
       retries: 10
